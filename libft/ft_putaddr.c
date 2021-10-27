@@ -1,43 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putaddr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 10:41:56 by rafernan          #+#    #+#             */
-/*   Updated: 2021/10/27 16:45:44 by rafernan         ###   ########.fr       */
+/*   Created: 2021/10/27 21:40:45 by rafernan          #+#    #+#             */
+/*   Updated: 2021/10/27 21:55:28 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_putnbr_fd(int n, int fd)
+int	ft_putaddr(int fd, size_t addr)
 {
-	char	buffer[11];
-	short	i;
-	int		ret;
-	
-	i = 0;
-	if (n == -2147483648)
-	{
-		write(fd, "-2147483648", 11);
-		return (11);
-	}
-	if (n < 0)
-	{
-		buffer[10] = '-';
-		n = (-n);
-	}
-	while (n > 0)
-	{
-		buffer[i++] = (n % 10) + ((int)('0'));
-		n = (n / 10);
-	}
-	ret = i;
-	if (buffer[10] == '-')
-		buffer[i++] = '-';
-	while (i--)
-		write(fd, &buffer[i], 1);
-	return (ret);
+	return (write(fd, "0x", 2) + ft_putunbr_base(fd, addr, 16));
 }

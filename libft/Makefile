@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 11:34:36 by rafernan          #+#    #+#              #
-#    Updated: 2021/10/27 14:29:42 by rafernan         ###   ########.fr        #
+#    Updated: 2021/10/27 20:27:19 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ CFLAGS=		\
 			-Werror\
 			-Wextra\
 
-SRCS=		$(shell find . -type f -maxdepth 1 -name "*.c")
+SRCS=		$(shell find . -maxdepth 1 -type f -name "*.c")
 OBJS=		$(patsubst %.c,%.o,$(SRCS))
 
 all: $(NAME) clean

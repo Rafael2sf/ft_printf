@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putunbr_base.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 10:42:00 by rafernan          #+#    #+#             */
-/*   Updated: 2021/10/27 15:35:09 by rafernan         ###   ########.fr       */
+/*   Created: 2021/10/27 20:24:36 by rafernan          #+#    #+#             */
+/*   Updated: 2021/10/27 23:11:57 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-ssize_t	ft_putstr_fd(char *s, int fd)
+int	ft_putunbr_base(int fd, size_t n, char base, char frmt)
 {
-	ssize_t	i;
+	char	c;
 
-	i = 0;
-	while (s && *s)
+	if (n >= (size_t)base)
+		ft_putunbr_base(fd, (n / base), base, frmt);
+	c = (n % base);
+	if (c >= 10)
 	{
-		write(fd, s++, 1);
-		i++;
+		if (frmt == 0)
+			ft_putchar(fd, c + 'a' - 10);
+		else
+			ft_putchar(fd, c + 'A' - 10);
 	}
-	return (i);
+	else
+		ft_putchar(fd, c + '0');
+	return (1);
 }

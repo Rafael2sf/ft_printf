@@ -6,28 +6,32 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:21:09 by rafernan          #+#    #+#             */
-/*   Updated: 2021/10/27 16:50:21 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/10/27 23:03:50 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static int	ft_printfc(va_list args, char **format)
 {
 	if (**format == ('%'))
-		return(ft_putchar_fd(**format, 1));
+		return(ft_putchar(1, **format));
 	else if (**format == ('c'))
-		return(ft_putchar_fd(va_arg(args, int), 1));
+		return(ft_putchar(1, va_arg(args, int)));
 	else if (**format == ('s'))
-		return(ft_putstr_fd(va_arg(args, char *), 1));
+		return(ft_putstr(1, va_arg(args, char *)));
 	else if (**format == ('d') || **format == ('i'))
-		return(ft_putnbr_fd(va_arg(args, int), 1));
+		return(ft_putnbr_base(1, va_arg(args, int), 10));
+	else if (**format == ('d') || **format == ('i'))
+		return(ft_putnbr_base(1, va_arg(args, int), 10));
+	else if (**format == ('u'))
+		return(ft_putnbr_base(1, va_arg(args, unsigned int), 10));
 	else if (**format == ('x'))
-		return(ft_puthex_fd(va_arg(args, unsigned int), 0, 1));
+		return(ft_putunbr_base(1, va_arg(args, unsigned int), 16));
 	else if (**format == ('X'))
-		return(ft_puthex_fd(va_arg(args, unsigned int), 1, 1));
-	else if (**format == ('p'))	
-		return(ft_puthex_fd((long)va_arg(args, void *), 1, 1));
+		return(ft_putunbr_base(1, va_arg(args, unsigned int), 16));
+	else if (**format == ('p'))
+		return(ft_putaddr(1, va_arg(args, unsigned long)));
 	return (1);
 }
 
