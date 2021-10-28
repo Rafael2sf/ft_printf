@@ -6,7 +6,7 @@
 #    By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/21 11:34:36 by rafernan          #+#    #+#              #
-#    Updated: 2021/10/27 20:27:19 by rafernan         ###   ########.fr        #
+#    Updated: 2021/10/28 15:22:08 by rafernan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,9 @@ all: $(NAME) clean
 
 $(NAME): $(OBJS)
 	ar rcs $@ $^
-	ranlib $@
 	
+bonus: all
+
 clean:
 	$(RM) $(OBJS)
 
@@ -39,4 +40,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all echo bonus clean fclean re
+.PHONY: all bonus clean fclean re

@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:21:09 by rafernan          #+#    #+#             */
-/*   Updated: 2021/10/27 23:03:50 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/10/28 15:35:11 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,47 @@
 static int	ft_printfc(va_list args, char **format)
 {
 	if (**format == ('%'))
-		return(ft_putchar(1, **format));
+		return (ft_putchar(1, **format));
 	else if (**format == ('c'))
-		return(ft_putchar(1, va_arg(args, int)));
+		return (ft_putchar(1, va_arg(args, int)));
 	else if (**format == ('s'))
-		return(ft_putstr(1, va_arg(args, char *)));
+		return (ft_putstr(1, va_arg(args, char *)));
 	else if (**format == ('d') || **format == ('i'))
-		return(ft_putnbr_base(1, va_arg(args, int), 10));
-	else if (**format == ('d') || **format == ('i'))
-		return(ft_putnbr_base(1, va_arg(args, int), 10));
+		return (ft_putnbr_base(1, va_arg(args, int), 10, 0));
 	else if (**format == ('u'))
-		return(ft_putnbr_base(1, va_arg(args, unsigned int), 10));
+		return (ft_putunbr_base(1, va_arg(args, unsigned int), 10, 0));
 	else if (**format == ('x'))
-		return(ft_putunbr_base(1, va_arg(args, unsigned int), 16));
+		return (ft_putunbr_base(1, va_arg(args, unsigned int), 16, 0));
 	else if (**format == ('X'))
-		return(ft_putunbr_base(1, va_arg(args, unsigned int), 16));
+		return (ft_putunbr_base(1, va_arg(args, unsigned int), 16, 1));
 	else if (**format == ('p'))
-		return(ft_putaddr(1, va_arg(args, unsigned long)));
+		return (ft_putaddr(1, va_arg(args, unsigned long)));
 	return (1);
 }
 
-static int	ft_printfm(char *format, va_list args, int *bytes)
+static int	ft_printfm(char *format, va_list args)
 {
+	int	bytes;
+
+	bytes = 0;
 	while (*format)
 	{
 		if (*format == '%')
 		{
 			format++;
 			if (ft_is(*format, "cspdiuxX%"))
-				(*bytes) += ft_printfc(args, &format);
+				bytes += ft_printfc(args, &format);
 			else
-				return (-1);
+				return (bytes);
 		}
 		else
 		{
 			write(1, format, 1);
-			(*bytes)++;
+			bytes++;
 		}
 		format++;
 	}
-	return (*bytes);
+	return (bytes);
 }
 
 int	ft_printf(const char *format, ...)
@@ -66,7 +67,7 @@ int	ft_printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	va_start(args, format);
-	bytes = ft_printfm((char *)format, args, &bytes);
+	bytes = ft_printfm((char *)format, args);
 	va_end(args);
 	return (bytes);
 }

@@ -6,7 +6,7 @@
 /*   By: rafernan <rafernan@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 10:42:00 by rafernan          #+#    #+#             */
-/*   Updated: 2021/10/27 21:37:11 by rafernan         ###   ########.fr       */
+/*   Updated: 2021/10/28 11:19:56 by rafernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ ssize_t	ft_putstr(int fd, char *s)
 	ssize_t	i;
 
 	i = 0;
-	while (s && *s)
+	if (!s)
+		return (write(fd, "(null)", 6));
+	while (*s)
 	{
 		write(fd, s++, 1);
 		i++;
