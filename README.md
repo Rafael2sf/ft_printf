@@ -33,10 +33,3 @@ make
 + Keep your code structured / organized as you go
 
 </br>
-
-<h2> Grade </h2>
-
-### 👌 100%
-Mandatory
-
-3 days
