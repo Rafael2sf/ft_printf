@@ -10,6 +10,9 @@ us. This project is of moderate difficulty. It will enable you to discover varia
 in C.
 The key to a successful ft_printf is a well-structured and good extensible code.
 
+# 💻 Compatibility
+unix / macOS
+
 ## ℹ️ Usage
 
 ~~~git
